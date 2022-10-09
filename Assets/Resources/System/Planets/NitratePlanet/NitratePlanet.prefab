@@ -1,0 +1,148 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5508691716099744337
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6137156453467480949}
+  - component: {fileID: 1399543112978826175}
+  - component: {fileID: -4651345814259805095}
+  - component: {fileID: -1122480055315937951}
+  m_Layer: 0
+  m_Name: NitratePlanet
+  m_TagString: Untagged
+  m_Icon: {fileID: 7422848464349959988, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6137156453467480949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508691716099744337}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &1399543112978826175
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508691716099744337}
+  m_Mesh: {fileID: 4960391283429108971, guid: f80843c7ad78efe4d88e684b330f4bb1, type: 3}
+--- !u!23 &-4651345814259805095
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508691716099744337}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a95095563ef92b14094e7a855841bcd8, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &-1122480055315937951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5508691716099744337}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1babc8c09ba1b934b83c5e0b77dd9e38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Amplitude: 0.058
+  levels: 3
+  Frequency: 1.36
+  roughness: 0.666
+  Persistence: 1.92
+  negativePeakClip: 0
+  positivePeakClip: 1.02
+  seaLevel: 0.93
+  craterAmplitude: 0
+  craterSize: 0
+  craterNum: 0
+  invertTerrain: 0
+  ridges: 0
+  doubleRidges: 0
+  antiRidges: 0
+  ridgePower: 1
+  polkaDots: 0
+  gasSurface: 0
+  fluidic: 0
+  weirdA: 0
+  slush: 0
+  plateaus: 0
+  supercontinentsB: 0
+  supercontinents: 1
+  blotches: 0
+  wrinkle: 0
+  warp: 0
+  warpForce: 1
+  discrete: 0
+  cheese: 0
+  crystalStructuresNum: 0
+  colorHigh: {r: 1, g: 0.9, b: 0.9, a: 1}
+  colorMid: {r: 0.6509434, g: 0.4016198, b: 0.40692452, a: 1}
+  colorLow: {r: 0.33962262, g: 0.19352081, b: 0.22747709, a: 1}
+  colorHighShifted: {r: 1, g: 0.9, b: 0.9, a: 1}
+  colorMidShifted: {r: 0.6509434, g: 0.4016198, b: 0.40692452, a: 1}
+  colorLowShifted: {r: 0.33962262, g: 0.19352081, b: 0.22747709, a: 1}
+  colorSea: {r: 0.6792453, g: 0.4318975, b: 0.6582797, a: 1}
+  colorSeaShifted: {r: 0.6792453, g: 0.4318975, b: 0.6582797, a: 1}
+  colorHeightHigh: 1.015
+  colorHeightMid: 1.012
+  colorHeightLow: 1.007
+  colorHeightDeep: 1
+  colorStripify: 1
+  colorHueShift: 0
+  atmosphereThickness: 0.027290983
+  cloudType: 0
+  polarCoverage: 0
+  mass: 0.63710916
+  rotationSpeed: 0.8198239
+  seed: 5580
+  subType: 1
