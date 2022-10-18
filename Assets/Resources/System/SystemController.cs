@@ -40,7 +40,7 @@ public class SystemController : GalaxyCatalog
 
     }
 
-
+    
 
     public void VisualizeSystem(Star visibleSystem)
     {
@@ -66,22 +66,29 @@ public class SystemController : GalaxyCatalog
         //Set sun shaft colors for the camera
         CameraSunShafts cameraSunShafts = GameObject.Find("/Camera/ClusterCameraSystem/CameraTarget/").GetComponent<CameraSunShafts>();
         cameraSunShafts.ChangeCameraSunShafts(true, visibleSystem.SolarTemperature, visibleSystem.Type.StarLightColor);
-        /*
-        ParticleSystem starWind = StarSystem.transform.Find("SolarWind").GetComponent<ParticleSystem>();
-        var starWindMain = starWind.main;
-    //    starWind.Clear();
-        starWindMain.maxParticles = visibleSystem.DustAmount;
-    //    starWind.Emit(visibleSystem.DustAmount);
-        var starWindEmission = starWind.emission;
-        starWindEmission.rateOverTime = visibleSystem.DustAmount*0.15f;
-        starWindEmission.rateOverDistance = 0;*/
+
+
+
+        //  var starWindMain = starWind.main;
+
+        // Color windColor = starWindMain.startColor;
+        // starWindMain.startColor = visibleSystem.SolarWindStrenght;
+
+
+
+        //    starWind.Emit(visibleSystem.DustAmount);
+
+        // SolarWindStrenght
+        //  starWindEmission = starWind.emission;
+        //    starWindEmission.rateOverTime = visibleSystem.SolarWindAmount;
+        //  starWindEmission.rateOverDistance = 0;
         // starWindMain.prewarm = true;
         // starWind.Emit(visibleSystem.DustAmount);
 
 
 
-        var starFlaresMain = StarSystem.transform.Find("SolarFlares").GetComponent<ParticleSystem>().main;
-        starFlaresMain.startColor = visibleSystem.Type.StarLightColor;
+        //var starFlaresMain = StarSystem.transform.Find("SolarFlares").GetComponent<ParticleSystem>().main;
+        //   starFlaresMain.startColor = visibleSystem.Type.StarLightColor;
 
         //Creates asteroid belts for the system
         foreach (AsteroidBelt asteroidBelt in visibleSystem.AsteroidBelts)
@@ -164,8 +171,9 @@ public class SystemController : GalaxyCatalog
                 }
         }
 
-        Debug.Log("STAR:" + visibleSystem.Type.Name + " NAME:"+ visibleSystem.Name + " ID:" + visibleSystem.Id);
+
         UI.StarDataView(visibleSystem);
+
     }
 
 

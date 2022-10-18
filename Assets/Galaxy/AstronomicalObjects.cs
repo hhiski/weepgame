@@ -56,7 +56,7 @@ static public class CelestialBody {
             SubType = Random.Range(1, 8);
             RingType = RingTypeProbability();
             Seed = Random.Range(1, 9999);
-            HueShift = Random.Range(-0.15f, 0.15f);
+            HueShift = Random.Range(-0.2f, 0.2f);
             Mass = MassProbability(Type.Name);
             OrbitDistance = orbitalDistance;
             Pos = SpaceMath.RandomPositionOnCircle(orbitalDistance, new Vector3(0, 0, 0));
@@ -75,7 +75,7 @@ static public class CelestialBody {
             SubType = Random.Range(1, 8);
             RingType = RingTypeProbability();
             Seed = Random.Range(1, 9999);
-            HueShift = Random.Range(-0.15f, 0.15f);
+            HueShift = Random.Range(-0.2f, 0.2f);
             Mass = MassProbability(Type.Name);
             RotationSpeed = Random.Range(0.5f, 8);
             PolarCoverage = 0;
@@ -190,7 +190,7 @@ static public class CelestialBody {
         public Vector3 Pos;
         public StarType Type;
         public string Name;
-        public int DustAmount;
+        public float SolarWindStrenght;
         public float SolarTemperature;
         public int NumOfPlanets;
         public int Id;
@@ -259,7 +259,7 @@ static public class CelestialBody {
             StarFormation starFormation = new StarFormation();
             StarType starType = starFormation.GetRandomTypeStar();
             Type = starType;
-            DustAmount = Mathf.Clamp((Random.Range(0, 240) - 40),0, 200);
+            SolarWindStrenght = Mathf.Clamp((Random.Range(0,1f)),0f, 0.8f);
             SolarTemperature = Random.Range(starType.TemperatureRange[0], starType.TemperatureRange[1]); 
             NumOfPlanets = 0;
 

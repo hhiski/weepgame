@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 using NoiseSpace;
 using ColorSpace;
@@ -37,7 +38,10 @@ public class PlanetSurface : MonoBehaviour
     public float roughness = 0.5f;
     [Range(0f, 2f)]
     public float Persistence = 1;
-    [Range(0f, 5f)]
+
+
+    public AnimationCurve heightCurve = AnimationCurve.Linear(-1f, -1f, 1f, 1f);
+    public float surfaceVariation = 0f;
 
     public float negativePeakClip = 0f;
     public float positivePeakClip = 2f;
@@ -57,7 +61,6 @@ public class PlanetSurface : MonoBehaviour
     public bool fluidic = false;
     public bool weirdA = false;
     public bool slush = false;
-    public bool plateaus = false;
     public bool supercontinentsB = false;
     public bool supercontinents = false;
 
@@ -65,7 +68,6 @@ public class PlanetSurface : MonoBehaviour
     public bool wrinkle = false;
     public bool warp = false;
     public float warpForce = 3f;
-    public bool discrete = false;
     public bool cheese = false;
 
     public int crystalStructuresNum = 0;
@@ -132,6 +134,8 @@ public class PlanetSurface : MonoBehaviour
         };
     }
 
+
+
     public void SetValues()
     {
         seed = Planet.Seed;
@@ -145,7 +149,7 @@ public class PlanetSurface : MonoBehaviour
         mass = Planet.Mass;
         bool polarCaps = Planet.Type.PolarCaps;
         polarCoverage = PolarCapsCoverage(polarCaps, polarCoverage);
-
+        surfaceVariation = Planet.Type.SurfaceVariation;
 
         Random = new System.Random(seed);
     }
@@ -202,7 +206,7 @@ public class PlanetSurface : MonoBehaviour
 
         this.transform.parent.GetComponent<PlanetSubTypes>().GetSubTypeValues(this, type, subType); //Overwrites some values from subType
 
-
+        UpdateSurfaceVariability();
         UpdateSurface();
         UpdateSurfaceColors();
         UpdateFlatColors();
@@ -230,8 +234,10 @@ public class PlanetSurface : MonoBehaviour
 
     float SurfaceNoisePatterns(float noise, Vector3 point, Noise noiseFilter, int level)
     {
+        noise = heightCurve.Evaluate(noise);
 
-            if (supercontinents)
+
+        if (supercontinents)
         {
             if (level == 1)
             {
@@ -268,21 +274,7 @@ public class PlanetSurface : MonoBehaviour
             noise = noiseFilter.Evaluate(point);
         };
 
-        if (plateaus)
-        {
 
-            if (noise >= 0.4f) { noise = (noise / 20) + 0.4f; }
-            else if (noise < -0.4f) { noise = (noise / 20) - 0.4f; }
-            else { noise = (noise / 50); };
-
-        };
-
-        if (weirdA)
-        {
-
-
-            noise = 3 * noise; noise = noise - Mathf.Round(noise); noise = noise / 3; ;
-        };
 
         if (wrinkle)
         {
@@ -318,18 +310,7 @@ public class PlanetSurface : MonoBehaviour
 
         };
 
-        if (blotches)
-        {
 
-
-
-            noise = noiseFilter.Evaluate(point * (0.8f + 0.2f * noise));
-            noise = noiseFilter.Evaluate(point * (0.8f + 0.2f * noise));
-            noise = noiseFilter.Evaluate(point * (0.8f + 0.2f * noise));
-
-
-
-        };
 
         if (ridges)
         {
@@ -354,17 +335,31 @@ public class PlanetSurface : MonoBehaviour
             noise += antiRidgeNoise;
         };
 
-        if (slush)
-        {
-            float slushNoise = ThirdNoiseLayer.Evaluate(point / 0.8f);
-            if (slushNoise > noise) { noise -= slushNoise / 3; }
-            if (slushNoise < noise) { noise += slushNoise / 3; }
-        }
+
         if (invertTerrain) { noise = -noise; }
+
+
 
         return noise;
     }
 
+    void UpdateSurfaceVariability()
+    {
+        Keyframe[] keys = heightCurve.keys;
+
+        float heightValue;
+
+        for (var keyIndex = 0; keyIndex < keys.Length; keyIndex++)
+        {
+
+            heightValue = keys[keyIndex].value;
+            heightValue = heightValue + (((float)Random.NextDouble() * 2f - 1) * surfaceVariation);
+            keys[keyIndex].value = heightValue;
+
+        }
+
+        heightCurve.keys = keys;
+    }
 
     public void UpdateSurface()
     {
@@ -378,6 +373,11 @@ public class PlanetSurface : MonoBehaviour
         float noise = 0;
         float iceHeight = 1;
         Vector3 point;
+
+
+            
+      
+
         foreach (Vector3 vertex in vertices) // First harmonic
         {
             point = vertex;
@@ -398,9 +398,7 @@ public class PlanetSurface : MonoBehaviour
             for (int i = 0; i < terrain.Count; i++)
             {
                 point = terrain[i];
-                //amplitude = (amplitude - (amplitude * roughness)) + ((Mathf.Pow(1 - roughness, levels) * amplitudeA) / levels);
-                //subAmplitude = (subAmplitude - (subAmplitude * roughness)) + ((Mathf.Pow(1 - roughness, currentLevel) * Amplitude) / currentLevel);
-
+            
                 Vector3 modPoint = SurfacePointPatterns(point);
                 noise = NoiseFunctions.PerlinFilter(modPoint, NoiseLayer, subFrequency, currentLevel, subAmplitude, 0);
                 noise = SurfaceNoisePatterns(noise, modPoint, NoiseLayer, currentLevel);

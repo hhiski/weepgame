@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using static CelestialBody;
 
 public class Controls : GalaxyCatalog
 {
@@ -58,9 +58,7 @@ public class Controls : GalaxyCatalog
 
     public void LocateSol()
     {
-
-        GalaxyCatalog.CreateSystem(3, 0);
-
+        GalaxyCatalog.LocateSol();
     }
 
     void Update()

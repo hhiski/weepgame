@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 3
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 2ff7bd1ac3ad0304084b46d65ee68aca, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.0052481857, g: 0.10581351, b: 0.033886727, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -992,7 +992,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1565480962387022, guid: 495ed65a8d60675439db071c9706bc3d, type: 3}
       propertyPath: m_Name
-      value: PostProcessIgnoringCamera
+      value: SunShaftIgnoringCamera
       objectReference: {fileID: 0}
     - target: {fileID: 1565480962387022, guid: 495ed65a8d60675439db071c9706bc3d, type: 3}
       propertyPath: m_Layer
@@ -4866,7 +4866,22 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 691230976}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &530801554
+--- !u!20 &530801553 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 6447978982919664854, guid: 8a4a1ea49211937418c28563e9553294,
+    type: 3}
+  m_PrefabInstance: {fileID: 691230976}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &530801555
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530801551}
+  m_Enabled: 0
+  m_CustomSkybox: {fileID: 2100000, guid: 2ff7bd1ac3ad0304084b46d65ee68aca, type: 2}
+--- !u!114 &530801556
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4875,49 +4890,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 530801551}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fceaeb339b971b429c4cc600acabd13, type: 3}
+  m_Script: {fileID: 11500000, guid: 4975a6e437fc3b149a8cd508ce5bdd69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tweakMode: 0
-  screenBlendMode: 1
-  hdr: 0
-  sepBlurSpread: 0.98
-  quality: 0
-  bloomIntensity: 1
-  bloomThreshold: 0.2
-  bloomThresholdColor: {r: 1, g: 1, b: 1, a: 1}
-  bloomBlurIterations: 2
-  hollywoodFlareBlurIterations: 2
-  flareRotation: 0
-  lensflareMode: 1
-  hollyStretchWidth: 2.5
-  lensflareIntensity: 0
-  lensflareThreshold: 0.3
-  lensFlareSaturation: 0.75
-  flareColorA: {r: 0.4, g: 0.4, b: 0.8, a: 0.75}
-  flareColorB: {r: 0.4, g: 0.8, b: 0.8, a: 0.75}
-  flareColorC: {r: 0.8, g: 0.4, b: 0.8, a: 0.75}
-  flareColorD: {r: 0.8, g: 0.4, b: 0, a: 0.75}
-  lensFlareVignetteMask: {fileID: 2800000, guid: 95ef4804fe0be4c999ddaa383536cde8,
-    type: 3}
-  lensFlareShader: {fileID: 4800000, guid: 459fe69d2f6d74ddb92f04dbf45a866b, type: 3}
-  screenBlendShader: {fileID: 4800000, guid: 7856cbff0a0ca45c787d5431eb805bb0, type: 3}
-  blurAndFlaresShader: {fileID: 4800000, guid: be6e39cf196f146d5be72fbefb18ed75, type: 3}
-  brightPassFilterShader: {fileID: 4800000, guid: 0aeaa4cb29f5d4e9c8455f04c8575c8c,
-    type: 3}
---- !u!114 &530801558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 530801551}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f97293eac03ec9e41bf2b2e457abafaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mat: {fileID: 2100000, guid: 1f1c99dc26c1ad149a78277d4e448358, type: 2}
+  threshold: 0.348
+  intensity: 1.43
+  blurSize: 1.6
+  blurIterations: 3
+  blurType: 0
+  fastBloomShader: {fileID: 4800000, guid: 68a00c837b82e4c6d92e7da765dc5f1d, type: 3}
 --- !u!114 &530801559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4931,7 +4912,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resolution: 1
-  screenBlendMode: 1
+  screenBlendMode: 0
   sunTransform: {fileID: 1813050877}
   radialBlurIterations: 2
   sunColor: {r: 1, g: 1, b: 1, a: 1}
@@ -6347,7 +6328,7 @@ PrefabInstance:
     - target: {fileID: 6447978982919664854, guid: 8a4a1ea49211937418c28563e9553294,
         type: 3}
       propertyPath: m_ClearFlags
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6447978982919664854, guid: 8a4a1ea49211937418c28563e9553294,
         type: 3}
@@ -6603,7 +6584,7 @@ MonoBehaviour:
   LineSpace: 15
   LineThickness: 0.8
   LineMaterial: {fileID: 2100000, guid: 0501fbcd28c830340b80849b7c11bc6f, type: 2}
-  LineColor: {r: 1, g: 0.77254903, b: 0, a: 0.46666667}
+  LineColor: {r: 1, g: 0.8111465, b: 0, a: 1}
   LineCircleNumber: 0
   LineCircleSpace: 0
   drawGrid: 1
@@ -14206,6 +14187,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 3311025877336284288}
+  SkyboxController: {fileID: 1066362601}
+--- !u!114 &1066362601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1066362599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 814010e25af72e74d81c5ea7c8da394f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GalaxySkybox: {fileID: 2100000, guid: 2ff7bd1ac3ad0304084b46d65ee68aca, type: 2}
+  ClusterSkybox: {fileID: 2100000, guid: 499eaf39f65f5cc45923227c1218191a, type: 2}
+  SystemSkybox: {fileID: 2100000, guid: 0a0797ace6de8d54abaeae15c8518b28, type: 2}
 --- !u!43 &1070836443
 Mesh:
   m_ObjectHideFlags: 0
@@ -18953,6 +18950,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 3311025877336284288}
+  SkyboxController: {fileID: 1066362601}
   StarPrefab: {fileID: 3166265334941150862, guid: 450672671e6191d42bd9c6581d30a5ea,
     type: 3}
 --- !u!4 &1397209902
@@ -19492,6 +19490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UI: {fileID: 0}
+  SkyboxController: {fileID: 0}
 --- !u!4 &1483384619
 Transform:
   m_ObjectHideFlags: 0
@@ -26618,9 +26617,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6726dcbb511f7942a93bfbe2e606a36, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GridLineNumber: 50
-  LineSpace: 20
-  LineThickness: 0.4
+  GridLineNumber: 20
+  LineSpace: 100
+  LineThickness: 1
   LineMaterial: {fileID: 2100000, guid: 0501fbcd28c830340b80849b7c11bc6f, type: 2}
   LineColor: {r: 0.019819975, g: 1, b: 0, a: 0.2901961}
   LineCircleNumber: 8
@@ -27187,7 +27186,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -340.9, y: 33.95002}
+  m_AnchoredPosition: {x: -340.9, y: 33.950012}
   m_SizeDelta: {x: 171.7, y: 27.7}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1908803331
@@ -28163,6 +28162,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6539478278887099883, guid: f4ebad23e52ef9b40baa70312e265964,
+        type: 3}
+      propertyPath: ShapeModule.radius.value
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539478278887099883, guid: f4ebad23e52ef9b40baa70312e265964,
+        type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 6000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6539478278887099883, guid: f4ebad23e52ef9b40baa70312e265964,
+        type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 6000
+      objectReference: {fileID: 0}
     - target: {fileID: 8044917281224310644, guid: f4ebad23e52ef9b40baa70312e265964,
         type: 3}
       propertyPath: m_Name
@@ -28176,7 +28190,7 @@ PrefabInstance:
     - target: {fileID: 8044917281224310644, guid: f4ebad23e52ef9b40baa70312e265964,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ebad23e52ef9b40baa70312e265964, type: 3}
@@ -28810,7 +28824,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2005753351
 Transform:
   m_ObjectHideFlags: 0
@@ -29044,6 +29058,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BgStarfield
+      objectReference: {fileID: 0}
+    - target: {fileID: 8044917281224310644, guid: f4ebad23e52ef9b40baa70312e265964,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f4ebad23e52ef9b40baa70312e265964, type: 3}
@@ -29535,6 +29554,21 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -4466129312539537713, guid: d72b52c1fdd825b478e748dd7264ea85, type: 3}
+--- !u!1 &2063736985 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1565480962387022, guid: 495ed65a8d60675439db071c9706bc3d,
+    type: 3}
+  m_PrefabInstance: {fileID: 142559057}
+  m_PrefabAsset: {fileID: 0}
+--- !u!45 &2063736988
+Skybox:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2063736985}
+  m_Enabled: 0
+  m_CustomSkybox: {fileID: 2100000, guid: 8298853ed5d9c044eb6a38ac941621cb, type: 2}
 --- !u!1 &2076518535
 GameObject:
   m_ObjectHideFlags: 0
@@ -29999,8 +30033,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3732686733568662005, guid: 3493c16164f6a574786d05a26d3255c6,
         type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 530801553}
+    - target: {fileID: 3732686733568662005, guid: 3493c16164f6a574786d05a26d3255c6,
+        type: 3}
       propertyPath: m_RenderMode
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3732686733568662005, guid: 3493c16164f6a574786d05a26d3255c6,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 3732686733568662005, guid: 3493c16164f6a574786d05a26d3255c6,
         type: 3}
@@ -30175,12 +30219,12 @@ PrefabInstance:
     - target: {fileID: 5660197772272497402, guid: 3493c16164f6a574786d05a26d3255c6,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 108.3
+      value: 108.29999
       objectReference: {fileID: 0}
     - target: {fileID: 5660197772272497402, guid: 3493c16164f6a574786d05a26d3255c6,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -140.3
+      value: -140.29999
       objectReference: {fileID: 0}
     - target: {fileID: 8477715922627570747, guid: 3493c16164f6a574786d05a26d3255c6,
         type: 3}
@@ -30549,6 +30593,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5508691716099744337, guid: 52c817b607243c840a3c3538b5470e4c,
         type: 3}
+    - target: {fileID: 3583502841352268129, guid: 8d1c841992c8c2d499d856b5c44cb602,
+        type: 3}
+      propertyPath: SkyboxController
+      value: 
+      objectReference: {fileID: 1066362601}
     - target: {fileID: 3583502841352268129, guid: 8d1c841992c8c2d499d856b5c44cb602,
         type: 3}
       propertyPath: SystemStarPrefab

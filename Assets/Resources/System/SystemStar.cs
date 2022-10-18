@@ -23,10 +23,41 @@ public class SystemStar : MonoBehaviour
         M 	2,400–3,700 K orange red
         */
 
-        
+        float solarWindStrenght = Star.SolarWindStrenght;
+        Color solarColor = Star.Type.StarLightColor;
+        ParticleSystem solarWind = transform.Find("SolarWind").GetComponent<ParticleSystem>();
+        ParticleSystem solarLoops = transform.Find("SolarLoops").GetComponent<ParticleSystem>();
+        ParticleSystem solarFilaments = transform.Find("SolarFilaments").GetComponent<ParticleSystem>();
+
+        SetStarParticleSystemColor(solarWind, solarWindStrenght, solarColor);
+        SetStarParticleSystemColor(solarLoops, 1, solarColor);
+        SetStarParticleSystemColor(solarFilaments, 1, solarColor);
 
     }
 
+    void SetStarParticleSystemColor(ParticleSystem system, float alpha, Color systemColor)
+    {
+        
+        ParticleSystem.MainModule starWindMain = system.main;
+        ParticleSystem.MinMaxGradient starWindColor = systemColor;
+        float solarWindStrenght = Star.SolarWindStrenght;
+        Color newStarWindColor = new Color(starWindColor.color.r, starWindColor.color.g, starWindColor.color.b, alpha);
+        starWindMain.startColor = newStarWindColor;
+
+        int numberParticles = system.particleCount;
+        ParticleSystem.Particle[] particleList;
+        particleList = new ParticleSystem.Particle[numberParticles];
+        int numParticlesAlive = system.GetParticles(particleList);
+
+        Color particleColor;
+        for (int i = 0; i < numParticlesAlive; i++)
+        {
+            particleColor = particleList[i].startColor;
+            particleList[i].startColor = new Color(particleColor.r, particleColor.g, particleColor.g, solarWindStrenght);
+        }
+        system.SetParticles(particleList, numParticlesAlive);
+
+    }
 
     void OnMouseDown()
     {

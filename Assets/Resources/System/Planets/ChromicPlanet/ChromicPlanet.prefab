@@ -99,6 +99,85 @@ MonoBehaviour:
   Frequency: 1.01
   roughness: 0.188
   Persistence: 1
+  heightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: -0.73226076
+      value: -0.73226076
+      inSlope: 0.99999994
+      outSlope: 0.99999994
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: -0.41274405
+      value: -0.41274402
+      inSlope: 0.99999994
+      outSlope: 0.99999994
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: -0.13419272
+      value: -0.13419268
+      inSlope: 0.99999994
+      outSlope: 0.99999994
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.19667596
+      value: 0.19667596
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.563323
+      value: 0.563323
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.82826877
+      value: 0.82826877
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  surfaceVariation: 0.61
   negativePeakClip: 0
   positivePeakClip: 2
   seaLevel: 1
@@ -115,14 +194,12 @@ MonoBehaviour:
   fluidic: 1
   weirdA: 0
   slush: 0
-  plateaus: 0
   supercontinentsB: 1
   supercontinents: 1
   blotches: 0
   wrinkle: 0
   warp: 0
   warpForce: 1
-  discrete: 0
   cheese: 0
   crystalStructuresNum: 0
   colorHigh: {r: 0.6320754, g: 0.16934848, b: 0.6296141, a: 1}

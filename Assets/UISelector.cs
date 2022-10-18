@@ -60,6 +60,8 @@ public class UISelector : MonoBehaviour
         buttomRightPos = new Vector3(targetPosViewport.x, targetPosViewport.y, 5);
         ButtomRight.transform.position = buttomRightPos;
 
+
+
     }
 
     void Update()

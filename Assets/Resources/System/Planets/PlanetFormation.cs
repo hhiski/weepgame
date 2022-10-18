@@ -37,6 +37,7 @@ public class PlanetType
 {
     public string Name = "EmptyType";
     public float Albedo = 0;
+    public float SurfaceVariation = 0.2f;
 
     public float[] TemperatureRange = new float[1]; //min and max values
     public float[] GreenhouseEffectRange = new float[1]; //not used?
@@ -62,6 +63,7 @@ public class PlanetType
         PressureRange = type.PressureRange;
         EnvRadioactivityRange = type.EnvRadioactivityRange;
         PolarCaps = type.PolarCaps;
+        SurfaceVariation = type.SurfaceVariation;
     }
 
     public PlanetType(){}

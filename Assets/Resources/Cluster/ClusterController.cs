@@ -65,7 +65,7 @@ public class ClusterController : GalaxyCatalog
         ColorizeCluster(activeCluster.Id);
 
         UI.ClusterDataView(activeCluster.Name);
-
+        SkyboxController.SetSkybox("cluster");
 
     }
 

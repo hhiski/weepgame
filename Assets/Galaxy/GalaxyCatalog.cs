@@ -15,19 +15,18 @@ public static class Globals
 public class GalaxyCatalog : MonoBehaviour
 {
 
-
-
     public Premaid Premaid = new Premaid();
     public Universe Universe = new Universe(0);
-
     public UiCanvas UI = new UiCanvas();
-
+    public SkyboxController SkyboxController = new SkyboxController();
 
     void Awake()
     {
         UI = GameObject.Find("/Canvas").GetComponent<UiCanvas>();
+        SkyboxController = GetComponent<SkyboxController>();
     }
-        void Start()
+
+    void Start()
     {
 
       
@@ -50,6 +49,27 @@ public class GalaxyCatalog : MonoBehaviour
         SaveIntoJson();
     }
 
+
+    public void LocateSol()
+    {
+        Debug.Log("Locating Sol...");
+        foreach (Cluster cluster in Universe.Clusters)
+        {
+            Debug.Log("Cluster: " + cluster.Name);
+            foreach (Star star in cluster.Stars)
+            {
+                Debug.Log("   Star: " + star.Name);
+                if (star.Name == "Sol")
+                {
+                    int clusterID = cluster.Id;
+                    int systemID = star.Id;
+                    Debug.Log("clusterID:" + clusterID + " systemID:" + star.Id);
+                    CreateSystem(clusterID, systemID);
+                    break;
+                }
+            }
+        }
+    }
 
     public void SaveIntoJson()
     {
@@ -156,7 +176,7 @@ public class GalaxyCatalog : MonoBehaviour
         SystemController SystemController = SystemScope.GetComponent<SystemController>();
 
         //  Star VisibleSystem = Universe.Clusters[clusterId].Stars[systemId]; //WRONG!! CHANGE LOCAL ORDER ID TO GLOBAL ID
-
+        SkyboxController.SetSkybox("system");
         foreach (Cluster cluster in Universe.Clusters)
         {
             foreach (Star star in cluster.Stars)
@@ -191,6 +211,8 @@ public class GalaxyCatalog : MonoBehaviour
         }
 
         UI.GalaxyDataView("Milky Way");
+        SkyboxController.SetSkybox("galaxy");
+
     }
 
 

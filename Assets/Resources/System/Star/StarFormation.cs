@@ -100,27 +100,27 @@ using UnityEngine;
             StarType A = new StarType();
             A.Id = 1;
             A.Name = "A-type";
-            A.StarColor = new Color(1f, 1f, 1f, 0.31f);
-            A.StarColorCold = new Color(0.39f, 0.49f, 0.5f, 1f);
-            A.StarLightColor = new Color(0.48f, 0.76f, 0.72f, 1f);
+            A.StarColor = new Color(0.792f, 0.792f, 0.792f, 1f);
+            A.StarColorCold = new Color(0.786f, 1f, 0.984f, 1f);
+            A.StarLightColor = new Color(0.022f, 1f, 0.859f, 1f);
             A.TemperatureRange = new float[] { 7500, 10000 };
             EveryStarTypeList.Add(A);
 
             StarType F = new StarType();
             F.Id = 1;
             F.Name = "F-type";
-            F.StarColor = new Color(0.99f, 1f, 0.5f, 1f);
-            F.StarColorCold = new Color(0.64f, 0.52f, 0.17f, 1f);
-            F.StarLightColor = new Color(0.72f, 0.72f, 0.28f, 1f);
+            F.StarColor = new Color(0.99f, 1f, 0.74f, 1f);
+            F.StarColorCold = new Color(0.942f, 0.94f, 0.554f, 1f);
+            F.StarLightColor = new Color(0.985f, 1f, 0.164f, 1f);
             F.TemperatureRange = new float[] { 6000, 7500 };
             EveryStarTypeList.Add(F);
 
             StarType G = new StarType();
             G.Id = 1;
             G.Name = "G-type";
-            G.StarColor = new Color(1f, 0.81f, 0.23f, 0.41f);
-            G.StarColorCold = new Color(0.66f, 0.37f, 0.00f, 1f);
-            G.StarLightColor = new Color(0.64f, 0.59f, 0.12f, 1f);
+            G.StarColor = new Color(0.857f, 0.871f, 0.41f, 1f);
+            G.StarColorCold = new Color(1f, 0.63f, 0.202f, 1f);
+            G.StarLightColor = new Color(0.45f, 0.147f, 0f, 1f);
             G.TemperatureRange = new float[] { 5200, 6000 };
             EveryStarTypeList.Add(G);
 

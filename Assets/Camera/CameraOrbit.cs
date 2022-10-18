@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using UnityStandardAssets.ImageEffects;
 
 public class CameraOrbit : MonoBehaviour
 {
@@ -34,7 +33,7 @@ public class CameraOrbit : MonoBehaviour
 
         SystemCamera = GameObject.Find("System Camera").GetComponent<Camera>();
 
-
+        GL.ClearWithSkybox(false, SystemCamera);
 
     }
 

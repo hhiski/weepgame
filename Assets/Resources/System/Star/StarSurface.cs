@@ -18,7 +18,6 @@ public class StarSurface : MonoBehaviour
 
     Noise NoiseLayerA, NoiseLayerB;
 
-
     Color[] colors;
     public Color starColor;
     public Color starColorCold;

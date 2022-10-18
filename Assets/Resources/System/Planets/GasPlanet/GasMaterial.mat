@@ -139,7 +139,7 @@ Material:
     - _OuterRadius: 8.16
     - _OuterRadius2: 1.92
     - _Parallax: 0.02
-    - _RimPower: 3.7
+    - _RimPower: 2.1
     - _Rotation: 0
     - _Samples: 10.93
     - _Scale: 1.08
