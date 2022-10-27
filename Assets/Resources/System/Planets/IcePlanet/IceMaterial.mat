@@ -111,14 +111,14 @@ Material:
     - _Exposure: 1
     - _FlipbookMode: 0
     - _GlossMapScale: 0.678
-    - _Glossiness: 0.591
+    - _Glossiness: 0.397
     - _GlossyReflections: 0
     - _ImageType: 0
     - _IntensityVC: 1
     - _Layout: 0
     - _LightingEnabled: 1
     - _Mapping: 1
-    - _Metallic: 0.248
+    - _Metallic: 1
     - _MirrorOnBack: 0
     - _Mode: 0
     - _OcclusionStrength: 1

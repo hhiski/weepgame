@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+using LineSpace;
+
 using static CelestialBody;
 
 public  class UiCanvas : MonoBehaviour
@@ -21,6 +24,9 @@ public  class UiCanvas : MonoBehaviour
     GameObject UISelector;
     GameObject UIZoomOutButton;
     GameObject UILocateSolButton;
+    GameObject UIFeatureTracker;
+    LineFunctions LineFunctions = new LineFunctions();
+    System.Random Random = new System.Random();
 
     /*public Color MainColor = new Color(0,1,0);
     public Color CautionColor = new Color(1, 1, 0);
@@ -34,8 +40,10 @@ public  class UiCanvas : MonoBehaviour
         UIDownPanel = this.transform.Find("DownPanel").gameObject;
         UILeftPanel = this.transform.Find("LeftPanel").gameObject;
         UISelector = this.transform.Find("Selector").gameObject;
+        UIFeatureTracker = this.transform.Find("FeatureTracker").gameObject;
         UIZoomOutButton = this.transform.Find("ZoomOutButton").gameObject;
         UILocateSolButton = this.transform.Find("LocateSolButton").gameObject;
+
     }
     void Start()
     {
@@ -100,6 +108,7 @@ public  class UiCanvas : MonoBehaviour
             UISelector.SetActive(true);
             UILocateSolButton.SetActive(true);
             UIZoomOutButton.SetActive(true);
+            UIFeatureTracker.SetActive(true);
         }
 
 
@@ -141,12 +150,13 @@ public  class UiCanvas : MonoBehaviour
             
         float targetSize = planet.Mass;
         Vector3 targetPos = planet.Pos;
-
-
+        
         Tracker(true, targetPos, targetSize);
-        CameraOrbit.CameraToPos(targetPos);
+        FeatureTracker(true, targetPos, planet.Features);
 
+        CameraOrbit.CameraToPos(targetPos);
     }
+
 
     public void UpdateDescriptor(string name, string type)
     {
@@ -180,6 +190,15 @@ public  class UiCanvas : MonoBehaviour
 
     }
 
+    void FeatureTracker(bool status, Vector3 targetPos, PlanetaryFeatures features)
+    {
+
+        UIFeatureTracker featureTracker = UIFeatureTracker.GetComponent<UIFeatureTracker>();
+        featureTracker.TrackingFeatures = status;
+        featureTracker.TargetPos = targetPos;
+        featureTracker.PlanetFeatures = features;
+
+    }
 
     void Update()
     {

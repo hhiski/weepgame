@@ -37,9 +37,7 @@ public class CameraSunShafts : MonoBehaviour
         float superHotMax = 45000;
         float superHotness = 0;
 
-        Color colorThreshold = Color.black;
-
-
+        Color colorThreshold = Color.red;
 
         superHotness = Mathf.InverseLerp(superHotMin, superHotMax, temperature);
 

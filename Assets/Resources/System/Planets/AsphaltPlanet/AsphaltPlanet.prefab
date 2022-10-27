@@ -99,50 +99,186 @@ MonoBehaviour:
   Frequency: 1.21
   roughness: 0.383
   Persistence: 1
+  heightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -0.9999986
+      inSlope: 0
+      outSlope: 1.0435376
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: -0.682771
+      value: -0.66895825
+      inSlope: 1.0435376
+      outSlope: 1.0476978
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: -0.414363
+      value: -0.38720816
+      inSlope: 1.0497081
+      outSlope: 1.0506191
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: -0.053681247
+      value: -0.008269027
+      inSlope: 1.0506191
+      outSlope: 1.0339453
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.29870063
+      value: 0.35607454
+      inSlope: 1.0339453
+      outSlope: 1.0395844
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.71867603
+      value: 0.7926744
+      inSlope: 1.0395844
+      outSlope: 1.0100464
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1.0768247
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  modifiedHeightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -0.8193057
+      inSlope: 0
+      outSlope: 1.0435376
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: -0.682771
+      value: -0.5368219
+      inSlope: 1.0435376
+      outSlope: 1.0476978
+      tangentMode: 5
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: -0.414363
+      value: -0.3515011
+      inSlope: 1.0497081
+      outSlope: 1.0506191
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: -0.053681247
+      value: -0.02947469
+      inSlope: 1.0506191
+      outSlope: 1.0339453
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.29870063
+      value: 0.52131337
+      inSlope: 1.0339453
+      outSlope: 1.0395844
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.71867603
+      value: 0.9036468
+      inSlope: 1.0395844
+      outSlope: 1.0100464
+      tangentMode: 69
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.9778616
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  surfaceVariation: 0.2
   negativePeakClip: 0.43
   positivePeakClip: 1.1
   seaLevel: 1
-  craterAmplitude: 0
-  craterSize: 0.24
-  craterNum: 0
+  craterAmplitude: 0.11
+  craterSize: 0.09
+  craterNum: 21
   invertTerrain: 1
   ridges: 0
   doubleRidges: 0
   antiRidges: 0
   ridgePower: 2
-  polkaDots: 1
+  polkaDots: 0
   gasSurface: 0
   fluidic: 0
   weirdA: 0
-  slush: 0
-  plateaus: 1
   supercontinentsB: 0
   supercontinents: 0
   blotches: 0
   wrinkle: 0
   warp: 0
   warpForce: 2
-  discrete: 0
   cheese: 1
   crystalStructuresNum: 0
   colorHigh: {r: 0.33333334, g: 0.42352942, b: 0.4160908, a: 1}
   colorMid: {r: 0.17397651, g: 0.254717, b: 0.2278035, a: 1}
   colorLow: {r: 0.015307935, g: 0.047169805, b: 0.039204337, a: 1}
-  colorHighShifted: {r: 0.33333334, g: 0.42352942, b: 0.38782644, a: 1}
-  colorMidShifted: {r: 0.17397651, g: 0.254717, b: 0.20250222, a: 1}
-  colorLowShifted: {r: 0.015307932, g: 0.047169805, b: 0.029219935, a: 1}
+  colorHighShifted: {r: 0.33333334, g: 0.42230892, b: 0.42352942, a: 1}
+  colorMidShifted: {r: 0.17397651, g: 0.24597667, b: 0.254717, a: 1}
+  colorLowShifted: {r: 0.015307932, g: 0.047169805, b: 0.03994664, a: 1}
   colorSea: {r: 0, g: 0, b: 0, a: 1}
   colorSeaShifted: {r: 0, g: 0, b: 0, a: 1}
   colorHeightHigh: 1.006
   colorHeightMid: 1.004
-  colorHeightLow: 1.003
-  colorHeightDeep: 0.98
+  colorHeightLow: 0.98
+  colorHeightDeep: 0.97
   colorStripify: 1
-  colorHueShift: -0.052227568
-  atmosphereThickness: 0.054070193
+  colorHueShift: 0.6
+  atmosphereThickness: 0.060813874
   cloudType: 0
   polarCoverage: 0
-  mass: 0.8634758
-  rotationSpeed: 6.334522
-  seed: 4499
-  subType: 3
+  mass: 0.9756383
+  rotationSpeed: 6.4261994
+  seed: 2283
+  subType: 5

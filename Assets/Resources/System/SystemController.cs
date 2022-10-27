@@ -138,6 +138,7 @@ public class SystemController : GalaxyCatalog
             PlanetSystem.GetComponent<SystemPlanet>().Planet = planet;
             PlanetSystem.transform.localScale = new Vector3(planet.Mass, planet.Mass, planet.Mass);
             PlanetSystem.transform.parent = this.transform;
+
             string planetTypename = planet.Type.Name;
             string planetPath = "System/Planets/"+ planetTypename +"Planet/" + planetTypename + "Planet";
             GameObject PlanetVisualPrefab = Resources.Load<GameObject>(planetPath) as GameObject;
@@ -152,7 +153,6 @@ public class SystemController : GalaxyCatalog
             PlanetVisual.GetComponent<PlanetSurface>().SetValues();
             PlanetVisual.GetComponent<PlanetSurface>().CopyVertices();
             PlanetVisual.GetComponent<PlanetSurface>().ShapePlanetSurface();
-            // PlanetSystem.GetComponent<SystemPlanet>().orbitSpeed = planet.OrbitSpeed;
 
             GameObject PlanetRing = Instantiate(RingPrefab, PlanetVisual.transform, false) as GameObject;
             PlanetRing.GetComponent<PlanetRing>().CreateRing(planet.RingType);

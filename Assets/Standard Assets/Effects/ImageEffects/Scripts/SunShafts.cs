@@ -80,7 +80,7 @@ namespace UnityStandardAssets.ImageEffects
             int rtH = source.height / divider;
 
             RenderTexture lrColorB;
-            RenderTexture lrDepthBuffer = RenderTexture.GetTemporary (rtW, rtH, 0);
+            RenderTexture lrDepthBuffer = RenderTexture.GetTemporary (rtW, rtH, -100);
 
             // mask out everything except the skybox
             // we have 2 methods, one of which requires depth buffer support, the other one is just comparing images

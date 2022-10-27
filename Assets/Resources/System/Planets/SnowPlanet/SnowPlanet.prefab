@@ -100,6 +100,58 @@ MonoBehaviour:
   Frequency: 1.4
   roughness: 0.43
   Persistence: 1
+  heightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: -0.5536907
+      value: -0.5536907
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: -0.03408501
+      value: -0.034085035
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.47324115
+      value: 0.47324115
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  surfaceVariation: 0
   negativePeakClip: 0
   positivePeakClip: 2
   seaLevel: 1
@@ -116,14 +168,12 @@ MonoBehaviour:
   fluidic: 0
   weirdA: 0
   slush: 1
-  plateaus: 0
   supercontinentsB: 0
   supercontinents: 0
   blotches: 0
   wrinkle: 0
   warp: 0
   warpForce: 1.2
-  discrete: 0
   cheese: 0
   crystalStructuresNum: 0
   colorHigh: {r: 1, g: 1, b: 1, a: 1}

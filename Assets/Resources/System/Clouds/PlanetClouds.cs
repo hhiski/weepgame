@@ -18,6 +18,7 @@ public class PlanetClouds : MonoBehaviour
     ColorFunctions ColorFunctions = new ColorFunctions();
 
     public Color cloudColor = new Color(1, 1, 1, 1);
+    public Color shiftedCloudColor = new Color(1, 1, 1, 1);
     public float cloudPower = 1.00f;
     public float cloudSwirl = 0.4f;
     public float Amplitude = 1;
@@ -103,14 +104,8 @@ public class PlanetClouds : MonoBehaviour
 
         Color newCloudColor = ColorFunctions.HueShiftColor(cloudColor, colorHueShift, 1);
 
-        cloudColor = newCloudColor; 
+        shiftedCloudColor = newCloudColor; 
 
-        /*
-        Color seaColor = new Color(1f, 0.0f, 1, 1);
-        Color newCloudColor = new Color(1f, 0.0f, 1, 1);
-        seaColor = this.gameObject.transform.parent.GetComponent<PlanetSurface>().colorSeaShifted;
-        newCloudColor = ColorFunctions.HueShiftColor(seaColor, 1.00f, 1);
-        cloudColor = newCloudColor;*/
 
     }
 
@@ -127,7 +122,7 @@ public class PlanetClouds : MonoBehaviour
             point = vertices[i];
             alphaNoise = PerlinFilter(point, NoiseLayer, Frequency, Amplitude);
 
-            colors[i] = cloudColor;
+            colors[i] = shiftedCloudColor;
             colors[i].a = alphaNoise;
         }
 

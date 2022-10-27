@@ -23,10 +23,9 @@ public class UISelector : MonoBehaviour
         ButtomLeft = Instantiate(Corner, transform);
         ButtomRight = Instantiate(Corner, transform);
 
-        TopRight.transform.rotation = Quaternion.Euler(0, 0,-90);
-        ButtomLeft.transform.rotation = Quaternion.Euler(0, -180, 90);
-        ButtomRight.transform.rotation = Quaternion.Euler(180, 0, 0);
-
+        TopRight.transform.rotation = Quaternion.Euler(0, 180, -90);
+        ButtomLeft.transform.rotation = Quaternion.Euler(0, 0, 90);
+        ButtomRight.transform.rotation = Quaternion.Euler(0, 0, 180);
 
     }
 
@@ -46,18 +45,22 @@ public class UISelector : MonoBehaviour
         
         Vector3 targetPosViewport = camera.WorldToScreenPoint(topLeftPos);
         topLeftPos = new Vector3(targetPosViewport.x, targetPosViewport.y, 5);
+        topLeftPos = camera.ScreenToWorldPoint(topLeftPos);
         TopLeft.transform.position = topLeftPos;
 
         targetPosViewport = camera.WorldToScreenPoint(topRightPos);
         topRightPos = new Vector3(targetPosViewport.x, targetPosViewport.y, 5);
+        topRightPos = camera.ScreenToWorldPoint(topRightPos);
         TopRight.transform.position = topRightPos;
 
         targetPosViewport = camera.WorldToScreenPoint(buttomLeftPos);
         buttomLeftPos = new Vector3(targetPosViewport.x, targetPosViewport.y, 5);
+        buttomLeftPos = camera.ScreenToWorldPoint(buttomLeftPos);
         ButtomLeft.transform.position = buttomLeftPos;
 
         targetPosViewport = camera.WorldToScreenPoint(buttomRightPos);
         buttomRightPos = new Vector3(targetPosViewport.x, targetPosViewport.y, 5);
+        buttomRightPos = camera.ScreenToWorldPoint(buttomRightPos);
         ButtomRight.transform.position = buttomRightPos;
 
 

@@ -45,6 +45,8 @@ static public class CelestialBody {
         public float PolarCoverage;
         public Atmosphere Atm;
         public Vector3 Pos;
+        public PlanetaryFeatures Features;
+
 
         public List<Moon> Moons = new List<Moon>();
 
@@ -64,8 +66,9 @@ static public class CelestialBody {
             RotationSpeed = Random.Range(0.5f, 8);
             PolarCoverage = 0;
             Atm = Type.RandomAtmosphere;
+            Features = new PlanetaryFeatures(Atm);
 
-     
+
         }
 
         public Planet(string type) //Forced planet type. eg. ice planets near the sun
@@ -88,6 +91,8 @@ static public class CelestialBody {
             {
                 Atm = Type.RandomAtmosphere;
             }
+            Features = new PlanetaryFeatures(Atm);
+
         }
 
 
@@ -102,9 +107,11 @@ static public class CelestialBody {
             Mass = MassProbability(Type.Name);
             PolarCoverage = 0;
             Atm = Type.RandomAtmosphere;
+            Features = new PlanetaryFeatures(Atm);
+
         }
 
-    public void GenerateMoons(Vector3 ParentPos)
+        public void GenerateMoons(Vector3 ParentPos)
             {
             float orbitDistance = 12f;
             if (RingType == 1) { orbitDistance += 1f; }

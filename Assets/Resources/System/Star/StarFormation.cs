@@ -120,7 +120,7 @@ using UnityEngine;
             G.Name = "G-type";
             G.StarColor = new Color(0.857f, 0.871f, 0.41f, 1f);
             G.StarColorCold = new Color(1f, 0.63f, 0.202f, 1f);
-            G.StarLightColor = new Color(0.45f, 0.147f, 0f, 1f);
+            G.StarLightColor = new Color(1f, 0.9f, 0.36f, 1f);
             G.TemperatureRange = new float[] { 5200, 6000 };
             EveryStarTypeList.Add(G);
 

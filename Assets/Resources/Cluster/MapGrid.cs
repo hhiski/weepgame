@@ -50,7 +50,7 @@ public class MapGrid : MonoBehaviour
                 Vector3[] circleLineSegments = new Vector3[100];
                 int circleSegmentCount = circleLineSegments.Length;
 
-                float orbitalDistance = LineSpace * 2 * lineIndex;
+                float orbitalDistance = LineCircleSpace * 2 * lineIndex;
 
 
                 Vector3 segmentPos = new Vector3(0, 0, 0);
@@ -66,8 +66,7 @@ public class MapGrid : MonoBehaviour
                     angle += (360f / circleSegmentCount);
                 }
 
-                LineFunctions.CreateLineObject(this.transform, new Vector3(0, 0, 0), "Cirle Line", circleLineSegments, LineMaterial, LineColor, LineThickness);
-
+                LineFunctions.CreateLineObject(this.transform, new Vector3(0, 0, 0), "Circle Line", circleLineSegments, LineMaterial, true, LineColor,  LineThickness);
             }
         }
 

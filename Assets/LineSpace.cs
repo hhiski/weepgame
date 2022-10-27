@@ -46,6 +46,9 @@ namespace LineSpace
 
         }*/
 
+
+
+
         public void CreateLineObject(Transform parent, Vector3 offset, string name, Vector3[] segments, Material material, Gradient lineGradient, float widthMultiplier)
         {
 
@@ -123,7 +126,7 @@ namespace LineSpace
             return lineObject;
         }
 
-        public GameObject CreateLineObject(Transform parent, Vector3 offset, string name, Vector3[] segments, Material material, Color color, float widthMultiplier)
+        public GameObject CreateLineObject(Transform parent, Vector3 offset, string name, Vector3[] segments, Material material, bool loop, Color color, float widthMultiplier)
         {
 
             GameObject lineObject = new GameObject();
@@ -135,6 +138,7 @@ namespace LineSpace
             LineRenderer lineRenderer = lineObject.GetComponent<LineRenderer>();
             lineRenderer.material = material;
             lineRenderer.startColor = color;
+            lineRenderer.loop = loop;
             lineRenderer.endColor = color;
             lineRenderer.widthMultiplier = widthMultiplier;
             int numberOfSegments = segments.Length;

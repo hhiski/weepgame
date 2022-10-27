@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+#region atmosphere classes
 public class Gas
 {
-
     public string Name;
     public float Rarity;
     public bool Breathable;
@@ -19,6 +19,8 @@ public class Gas
     }
 }
 
+
+
 public class Atmosphere { 
 
     public float Radiation;
@@ -30,14 +32,14 @@ public class Atmosphere {
     public Gas PrimaryGas;
 };
 
-
+#endregion 
 
 #region PlanetTypes
 public class PlanetType
 {
     public string Name = "EmptyType";
     public float Albedo = 0;
-    public float SurfaceVariation = 0.2f;
+    public float SurfaceVariation = 0.4f;
 
     public float[] TemperatureRange = new float[1]; //min and max values
     public float[] GreenhouseEffectRange = new float[1]; //not used?
@@ -154,7 +156,6 @@ class AtmosphereGasFormation
     public readonly Gas CarbonDioxideNitrogen = new Gas { Name = "Carbon Dioxide-Nitrogen", Breathable = false, Toxic = false, Rarity = 1 };
     public readonly Gas CarbonDioxideOxygen = new Gas { Name = "Carbon Dioxide-Oxygen", Breathable = true, Toxic = false, Rarity = 1 };
     public readonly Gas CarbonDioxideMethane = new Gas { Name = "Carbon Dioxide-Methane", Breathable = false, Toxic = false, Rarity = 1 };
-
     public readonly Gas HeliumHydrogen = new Gas { Name = "Helium-Hydrogen", Breathable = false, Toxic = false, Rarity = 1 };
     public readonly Gas HydrogenHelium = new Gas { Name = "Hydrogen-Helium", Breathable = false, Toxic = false, Rarity = 1 };
     // List<Gas> CommonGasses = new List<Gas>();
@@ -233,6 +234,7 @@ class AtmosphereGasFormation
 class PlanetFormation
 {
     AtmosphereGasFormation GasTypes = new AtmosphereGasFormation();
+
     public List<PlanetType> PopulatePlanetList()
     {
         Gas[] commonMix = GasTypes.GetCommonGasList();

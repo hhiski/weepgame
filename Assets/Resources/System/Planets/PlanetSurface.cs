@@ -41,6 +41,8 @@ public class PlanetSurface : MonoBehaviour
 
 
     public AnimationCurve heightCurve = AnimationCurve.Linear(-1f, -1f, 1f, 1f);
+    public AnimationCurve modifiedHeightCurve = AnimationCurve.Linear(-1f, -1f, 1f, 1f);
+
     public float surfaceVariation = 0f;
 
     public float negativePeakClip = 0f;
@@ -60,7 +62,6 @@ public class PlanetSurface : MonoBehaviour
     public bool gasSurface = false;
     public bool fluidic = false;
     public bool weirdA = false;
-    public bool slush = false;
     public bool supercontinentsB = false;
     public bool supercontinents = false;
 
@@ -234,7 +235,7 @@ public class PlanetSurface : MonoBehaviour
 
     float SurfaceNoisePatterns(float noise, Vector3 point, Noise noiseFilter, int level)
     {
-        noise = heightCurve.Evaluate(noise);
+        noise = modifiedHeightCurve.Evaluate(noise);
 
 
         if (supercontinents)
@@ -358,7 +359,7 @@ public class PlanetSurface : MonoBehaviour
 
         }
 
-        heightCurve.keys = keys;
+        modifiedHeightCurve.keys = keys;
     }
 
     public void UpdateSurface()
@@ -437,9 +438,15 @@ public class PlanetSurface : MonoBehaviour
 
     void HueShiftColors()
     {
-        colorHighShifted = ColorFunctions.HueShiftColor(colorHigh, colorHueShift, 1);
-        colorMidShifted = ColorFunctions.HueShiftColor(colorMid, colorHueShift, 1);
-        colorLowShifted = ColorFunctions.HueShiftColor(colorLow, colorHueShift, 1);
+        float hueVariation = 1.2f * colorHueShift;
+        float highColorHueVariation = colorHueShift + (float)Random.NextDouble() * hueVariation - 0.5f* hueVariation;
+        float midColorHueVariation = highColorHueVariation + (float)Random.NextDouble() * hueVariation - 0.5f* hueVariation;
+        float lowColorHueVariation = midColorHueVariation + (float)Random.NextDouble() * hueVariation - 0.5f* hueVariation;
+
+
+        colorHighShifted = ColorFunctions.HueShiftColor(colorHigh, highColorHueVariation, 1);
+        colorMidShifted = ColorFunctions.HueShiftColor(colorMid, midColorHueVariation, 1);
+        colorLowShifted = ColorFunctions.HueShiftColor(colorLow, lowColorHueVariation, 1);
         colorSeaShifted = ColorFunctions.HueShiftColor(colorSea, colorHueShift, 1);
     }
 

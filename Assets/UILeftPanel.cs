@@ -19,7 +19,10 @@ public class UILeftPanel : MonoBehaviour
         UpdateIndicatorGas(planet);
         UpdateIndicatorNumbers(planet);
         UpdateIndicatorBars(planet);
+
     }
+
+
 
     void UpdateIndicatorGas(Planet planet)
     {

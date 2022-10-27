@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5508691716099744337}
-  m_Mesh: {fileID: 4960391283429108971, guid: f80843c7ad78efe4d88e684b330f4bb1, type: 3}
+  m_Mesh: {fileID: -6143415126239388086, guid: 289aff1cc5eadc0428f0b9181f11be07, type: 3}
 --- !u!23 &-4651345814259805095
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -103,6 +103,100 @@ MonoBehaviour:
   Frequency: 1.6
   roughness: 0.43
   Persistence: 1
+  heightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -1
+      inSlope: 1.0000002
+      outSlope: 1.0000002
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: -0.70880485
+      value: -0.7088048
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: -0.33915254
+      value: -0.33915254
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.0031391406
+      value: 0.0031391978
+      inSlope: 1.0000002
+      outSlope: 1.0000002
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.33829653
+      value: 0.3382967
+      inSlope: 1.0000001
+      outSlope: 1.0000001
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.7798414
+      value: 0.77984154
+      inSlope: 0.99999964
+      outSlope: 0.99999964
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0.99999946
+      outSlope: 0.99999946
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  modifiedHeightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -1
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  surfaceVariation: 0
   negativePeakClip: 0
   positivePeakClip: 2
   seaLevel: 1
@@ -118,15 +212,12 @@ MonoBehaviour:
   gasSurface: 0
   fluidic: 0
   weirdA: 0
-  slush: 0
-  plateaus: 0
   supercontinentsB: 1
   supercontinents: 0
   blotches: 0
   wrinkle: 0
   warp: 0
   warpForce: 0.97
-  discrete: 0
   cheese: 0
   crystalStructuresNum: 0
   colorHigh: {r: 0.6037736, g: 0.57833153, b: 0.2984692, a: 1}
@@ -163,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloudColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 0.8392157}
+  shiftedCloudColor: {r: 1, g: 1, b: 1, a: 1}
   cloudPower: 3
   cloudSwirl: 1
   Amplitude: 1.15
