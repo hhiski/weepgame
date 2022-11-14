@@ -99,7 +99,11 @@ public class PlanetSurface : MonoBehaviour
 
     public Planet Planet;
 
+    private Hydrosphere hydrosphere;
+
     GameObject Sea;
+
+
 
     public int seed = 1;
     public int subType = 0;
@@ -126,7 +130,9 @@ public class PlanetSurface : MonoBehaviour
 
             for (int i = 0; i < seaVertices.Length; i++)
             {
-                seaVertices[i] *= seaLevel;
+                seaVertices[i] *= hydrosphere.OceanSize;
+                //seaVertices[i] *= seaLevel;
+
                 colors[i] = colorSeaShifted;
 
             }
@@ -141,6 +147,7 @@ public class PlanetSurface : MonoBehaviour
     {
         seed = Planet.Seed;
         type = Planet.Type.Name;
+        hydrosphere = Planet.Hydrosphere;
         temperature = Planet.Atm.Temperature;
         subType = Planet.SubType;
         colorHueShift = Planet.HueShift;
@@ -159,7 +166,7 @@ public class PlanetSurface : MonoBehaviour
     {
         if (polarCoverage == 0) //polarCoverage not already set;
         {
-            if (polarCaps) //planet type has caps
+            if (hydrosphere.PolarCapsExist()) //planet type has caps
             {
 
                 if (Planet.Type.Name == "Water")
@@ -212,16 +219,93 @@ public class PlanetSurface : MonoBehaviour
         UpdateSurfaceColors();
         UpdateFlatColors();
 
-        UpdatePolkaDots();
         UpdateCrystalStructures();
 
 
         UpdateCraters();
 
         UpdateSea();
-
     }
 
+    public Vector3 RandomVertexPosition()
+    {
+        Vector3[] vertices = planetMesh.vertices;
+        int randomVertex = Random.Next(0, vertices.Length);
+        return vertices[randomVertex] + Vector3.Normalize(vertices[randomVertex]) * 0.02f; ;
+    }
+
+    public Vector3 SuitableFeaturePosition(string locationType)
+    {
+        Vector3[] vertices = planetMesh.vertices;
+        Vector3 suitableVertex = new Vector3(0,0,0);
+        int randomVertexId;
+        if (locationType == "Sea")
+        {
+            List<Vector3> seaVertices = new List<Vector3>();
+            foreach (Vector3 vertex in vertices) // First harmonic
+            {
+                if (vertex.magnitude < seaLevel)
+                 seaVertices.Add(vertex);
+            }
+            if (seaVertices.Count == 0)
+            {
+                suitableVertex = RandomVertexPosition();
+            }
+            else
+            {
+                randomVertexId = Random.Next(0, seaVertices.Count);
+                suitableVertex = Vector3.Normalize(seaVertices[randomVertexId]) * seaLevel*1.1f;
+            }
+        }
+        if (locationType == "Land")
+        {
+            List<Vector3> landVertices = new List<Vector3>();
+            foreach (Vector3 vertex in vertices) // First harmonic
+            {
+                if (vertex.magnitude > seaLevel)
+                    landVertices.Add(vertex);
+            }
+
+            if (landVertices.Count == 0)
+            {
+                suitableVertex = RandomVertexPosition();
+            }
+            else
+            {
+                randomVertexId = Random.Next(0, landVertices.Count);
+                suitableVertex = landVertices[randomVertexId];
+            }
+        }
+        if (locationType == "Polar")
+        {
+            List<Vector3> polarVertices = new List<Vector3>();
+            foreach (Vector3 vertex in vertices) // First harmonic
+            {
+                if (Mathf.Abs(vertex.y) > 1 - polarCoverage)
+                    polarVertices.Add(vertex);
+            }
+
+            if (polarVertices.Count == 0)
+            {
+                suitableVertex = RandomVertexPosition();
+            }
+            else
+            {
+                randomVertexId = Random.Next(0, polarVertices.Count);
+                suitableVertex = polarVertices[randomVertexId];
+            }
+        }
+        
+
+        else  
+        {
+            int randomVertex = Random.Next(0, vertices.Length);
+            suitableVertex = vertices[randomVertex];
+        }
+
+        return suitableVertex;
+    }
+    
 
     Vector3 SurfacePointPatterns(Vector3 point)
     {
@@ -406,12 +490,24 @@ public class PlanetSurface : MonoBehaviour
                 noise = 1 + (noise * subAmplitude);
                 point = point *= noise;
 
-                if (Mathf.Abs(point.y) > (1 - polarCoverage) + 0.1f)
+                if (Mathf.Abs(point.y) > (1 - polarCoverage) + 0.15f)
                 {
                     iceHeight = 1;
                     if (point.magnitude < seaLevel) { iceHeight = (seaLevel / iceHeight) + 0.004f; };
+
+
                     point = new Vector3(point.x * iceHeight, point.y * iceHeight, point.z * iceHeight);
                 }
+                else if (Mathf.Abs(point.y) > (1 - polarCoverage))
+                {
+                    iceHeight = 1;
+                    float iceNoise = NoiseFunctions.PerlinFilter(point, NoiseLayer, 1.9f,1, 0, 5321);
+                    if (point.magnitude < seaLevel && iceNoise >= 0f) { iceHeight = (seaLevel / iceHeight) + 0.004f; };
+
+
+                    point = new Vector3(point.x * iceHeight, point.y * iceHeight, point.z * iceHeight);
+                }
+
 
                 if (point.magnitude < negativePeakClip)
                 {
@@ -483,7 +579,7 @@ public class PlanetSurface : MonoBehaviour
         {
             point = vertices[i];
 
-            colorNoise = (NoiseFunctions.PerlinFilter(point, noiseLayer, 2.1f, 1, 0.15f, 0));
+            colorNoise = (NoiseFunctions.PerlinFilter(point, noiseLayer, 1.7f, 1, 0.35f, 0));
             colorNoise = 1 + (colorNoise * 0.15f);
 
             float height = point.magnitude;
@@ -632,67 +728,19 @@ public class PlanetSurface : MonoBehaviour
         }
     }
 
-    void UpdatePolkaDots()
-    {
-        if (polkaDots)
-        {
-            Random = new System.Random(seed + 3);
-            Vector3[] vertices = planetMesh.vertices;
-            Vector3[] polkaVertices = new Vector3[35];
-            // List<Vector3> terrain = new List<Vector3>();
-            // terrain.Add(point);
-            Color polkaColor = ColorFunctions.SaturationShiftColor(colorMidShifted, 0f, 1.2f);
-            polkaColor = ColorFunctions.HueShiftColor(colorMidShifted, 0.0f, 1.1f);
-            polkaColor = ColorFunctions.ValueShiftColor(colorMidShifted, 1.05f, 1.0f);
-            float distance = 0;
-            float polkaSize = 0.55f;
-            for (int i = 0; i < polkaVertices.Length; i++)
-            {
-                int randomPoint = Random.Next(0, vertices.Length);
-                polkaVertices[i] = vertices[randomPoint];
-            }
-
-
-            for (int j = 0; j < polkaVertices.Length; j++)
-            {
-
-                polkaSize = SpaceMath.StandardDeviation(craterSize, 0.7f*craterSize, seed+j); ;
-
-                for (int i = 0; i < vertices.Length; i++)
-                {
-
-                    distance = Vector3.Distance(vertices[i], polkaVertices[j]);
-
-                    if (distance <= polkaSize && distance > polkaSize * 0.80f - 0.05f)
-                    {
-                        float absDistance = Mathf.Abs(distance - polkaSize * 0.80f - 0.05f);
-                        float edgeHighlight = 1 + Mathf.InverseLerp(0, 0.1f, absDistance) * 0.65f;
-
-                        colors[i] = ColorFunctions.ValueShiftColor(colors[i], 0, edgeHighlight);
-
-                    }
-
-                    else if (distance <= polkaSize * 0.80f - 0.05f)
-                    {
-
-                        colors[i] = ColorFunctions.SaturationShiftColor(colors[i], 0, 0.85f);
-
-                    }
-
-                }
-
-            }
-
-            planetMesh.colors = colors;
-        }
-    }
 
     void UpdateCraters()
     {
         Random = new System.Random(seed);
         Vector3[] vertices = planetMesh.vertices;
 
-        for (int i = 0; i < craterNum; i++)
+        int craterNumber = 0;
+
+        craterNumber = (int)(SpaceMath.StandardDeviation(craterNum, 0.6f * craterNum));
+        craterNumber = Mathf.Clamp(craterNumber, 0, craterNum * 3);
+
+
+        for (int i = 0; i < craterNumber; i++)
         {
             int craterId = Random.Next(0, vertices.Length);
             Vector3 craterPos = vertices[craterId];

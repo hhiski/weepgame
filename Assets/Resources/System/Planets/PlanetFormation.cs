@@ -3,6 +3,166 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+#region hydrosphere classes
+
+public class HydrosphereSource
+{
+    public string Name;
+    public int Priority; //higher number -> easier accessability and a primary water source
+    public float[] TemperatureRange = new float[1]; 
+    public float[] WetnessRange = new float[1];
+
+
+    public HydrosphereSource()
+    {
+        Name = "None";
+        TemperatureRange = new float[] { -274f,999999f };
+        WetnessRange = new float[] { 0f, 1f };
+        Priority = 0;
+    }
+}
+
+public class Hydrosphere
+{
+    public float OceanSize; // the size multiplier of the ocean sphere object +- 0.3 ampl
+    public HydrosphereSource PrimaryWaterSource;
+    public List<HydrosphereSource> availableWaterSources = new List<HydrosphereSource>();
+
+    HydrosphereSource NoWater = new HydrosphereSource { Name = "None", Priority = 1 };
+    HydrosphereSource WaterVapor = new HydrosphereSource { Name = "Water Vapor", TemperatureRange = new float[] { -200f, 600f }, WetnessRange = new float[] { 0.02f, 1 }, Priority = 2 };
+    HydrosphereSource PolarIceCaps = new HydrosphereSource { Name = "Polar Ice Caps", TemperatureRange = new float[] { -274f, 30f }, WetnessRange = new float[] { 0.2f, 1 }, Priority = 3 };
+    HydrosphereSource GlacierIce = new HydrosphereSource { Name = "Glacier Ice", TemperatureRange = new float[] { -274f, -5f }, WetnessRange = new float[] { 0.5f, 1 }, Priority = 4 };
+    HydrosphereSource SeaWater = new HydrosphereSource { Name = "Sea Water", TemperatureRange = new float[] { -30f, 100f }, WetnessRange = new float[] { 0.5f, 1 }, Priority = 5 };
+    HydrosphereSource FreshWater = new HydrosphereSource { Name = "Fresh Water", TemperatureRange = new float[] { -5f, 100f }, WetnessRange = new float[] { 0.5f, 1 }, Priority = 6 };
+
+    HydrosphereSource[] GetPossibleWaterSources()
+    {
+        HydrosphereSource[] sources = new HydrosphereSource[] { WaterVapor, PolarIceCaps, GlacierIce, SeaWater, FreshWater };
+        return sources;
+    }
+
+    public Hydrosphere(float[] liquidRange, Atmosphere atmosphere)
+    {
+
+        float liquidAmount = Random.Range(liquidRange[0], liquidRange[1]);
+
+        HydrosphereSource[] waterSources = GetPossibleWaterSources();
+        HydrosphereSource bestWaterSource = new HydrosphereSource();
+
+        foreach (HydrosphereSource waterSource in waterSources)
+        {
+
+
+            if (atmosphere.Temperature >= waterSource.TemperatureRange[0] && atmosphere.Temperature <= waterSource.TemperatureRange[1])
+            {
+                if (liquidAmount >= waterSource.WetnessRange[0] && liquidAmount <= waterSource.WetnessRange[1])
+                {
+                    if (waterSource.Priority > bestWaterSource.Priority)
+                    {
+                        availableWaterSources.Add(waterSource);
+                        bestWaterSource = waterSource;
+                    }
+                }
+            }
+        }
+
+        PrimaryWaterSource = bestWaterSource;
+
+        OceanSize = liquidAmount * 0.02f - 0.01f + 1;
+    }
+
+    public bool PolarCapsExist()
+    {
+        bool polarCapsFound = false;
+        foreach (HydrosphereSource waterSource in availableWaterSources)
+        {
+            if (waterSource.Name == "Polar Ice Caps")
+            {
+                polarCapsFound = true;
+                break;
+            }
+        }
+
+        return polarCapsFound;
+    }
+    public bool SeasExist()
+    {
+        bool polarCapsFound = false;
+        foreach (HydrosphereSource waterSource in availableWaterSources)
+        {
+            if (waterSource.Name == "Polar Ice Caps")
+            {
+                polarCapsFound = true;
+                break;
+            }
+        }
+
+        return polarCapsFound;
+    }
+};
+#endregion 
+
+
+#region biosphere classes
+public class Biosphere
+{
+
+  
+    // 0 - Lifeless
+    // 1 - Unicellular 
+    // 2 - Multicellular
+    // 3 - Civilizations
+    public int BiosphereLevel;
+
+    //Species here?
+
+
+    public Biosphere(float lifeProbability)
+    {
+        BiosphereLevel = GetRandomBiosphereLevel(lifeProbability);
+    }
+
+    public Biosphere()
+    {
+        BiosphereLevel = 0;
+    }
+
+    private int GetRandomBiosphereLevel(float lifeProbability)
+    {
+
+        float lifeProbabilityTest = Random.Range(0, 1f);
+        float biosphereLevelTest = Random.Range(0, 1f);
+
+        int biosphereLevel = 0;
+
+        if (lifeProbabilityTest <= lifeProbability) // life on the planet!
+        {
+            if (biosphereLevelTest <= 0.75f)
+            {
+                biosphereLevel = 1;
+            }
+            else if (biosphereLevelTest <= 0.95f)
+            {
+                biosphereLevel = 2;
+            }
+            else
+            {
+                biosphereLevel = 3;
+            }
+        }
+        else
+        {
+            biosphereLevel = 0;
+        }
+        return biosphereLevel;
+
+    }
+
+
+
+};
+#endregion 
+
 #region atmosphere classes
 public class Gas
 {
@@ -30,6 +190,8 @@ public class Atmosphere {
     public float Temperature; // Simplified
 
     public Gas PrimaryGas;
+
+
 };
 
 #endregion 
@@ -40,11 +202,15 @@ public class PlanetType
     public string Name = "EmptyType";
     public float Albedo = 0;
     public float SurfaceVariation = 0.4f;
+    public float LifeProbability = 0;
 
     public float[] TemperatureRange = new float[1]; //min and max values
     public float[] GreenhouseEffectRange = new float[1]; //not used?
     public float[] PressureRange = new float[1]; //min and max values
     public float[] EnvRadioactivityRange = new float[1]; //terrestrial radiation (not cosmic rays!), min and max values 
+    public float[] WetnessRange = new float[] { 0f, 1.0f }; //0 = completely waterless, 1 = really wet, 0.75 = earth hydrosphere equivalent
+
+
 
     public Gas[] GasList = new Gas[] {  }; // list of possible gas mixes
 
@@ -64,8 +230,10 @@ public class PlanetType
         GreenhouseEffectRange = type.GreenhouseEffectRange;
         PressureRange = type.PressureRange;
         EnvRadioactivityRange = type.EnvRadioactivityRange;
+        WetnessRange = type.WetnessRange;
         PolarCaps = type.PolarCaps;
         SurfaceVariation = type.SurfaceVariation;
+        LifeProbability = type.LifeProbability;
     }
 
     public PlanetType(){}
@@ -131,22 +299,10 @@ public class PlanetType
             }
     }
 }
+
+
 class AtmosphereGasFormation
-{    // string[] randomThinGas = { "Nitrogen-Oxygen", "Nitrogen - Carbon Dioxide", "Nitrogen-Methane" };
-     // string[] randomGreenhouseGas = { "Carbon Dioxide-Nitrogen", "Nitrogen - Carbon Dioxide", "Nitrogen-Methane"};
-
-
-    /*
-
-    
-
-    Nitrogen-Oxygen
-    Nitrogen-Methane
-    Nitrogen-Chlorine
-    Nitrogen-Sulfur Dioxide
-    Helium-Hydrogen
-    Hydrogen-Helium
-    */
+{   
 
     public readonly Gas NitrogenCarbonDioxide = new Gas  { Name = "Nitrogen-Carbon Dioxide",  Breathable = false, Toxic = false, Rarity = 1 };
     public readonly Gas NitrogenMethane = new Gas { Name = "Nitrogen-Methane", Breathable = false, Toxic = false, Rarity = 1};
@@ -158,6 +314,8 @@ class AtmosphereGasFormation
     public readonly Gas CarbonDioxideMethane = new Gas { Name = "Carbon Dioxide-Methane", Breathable = false, Toxic = false, Rarity = 1 };
     public readonly Gas HeliumHydrogen = new Gas { Name = "Helium-Hydrogen", Breathable = false, Toxic = false, Rarity = 1 };
     public readonly Gas HydrogenHelium = new Gas { Name = "Hydrogen-Helium", Breathable = false, Toxic = false, Rarity = 1 };
+
+
     // List<Gas> CommonGasses = new List<Gas>();
 
     internal Gas[] GetWaterGasList()
@@ -252,7 +410,9 @@ class PlanetFormation
             TemperatureRange = new float[] { -5, 60 },
             GreenhouseEffectRange = new float[] { 25, 36 },
             EnvRadioactivityRange = new float[] { 0.0005f, 0.01f },
-            PolarCaps = true
+            WetnessRange = new float[] { 0.5f, 1f },
+            PolarCaps = true,
+            LifeProbability = 0.8f
         };
         EveryPlanetTypeList.Add(Water);
 
@@ -265,6 +425,8 @@ class PlanetFormation
             GreenhouseEffectRange = new float[] { 5, 30 },
             PressureRange = new float[] { 0.2f, 3f },
             EnvRadioactivityRange = new float[] { 0.0001f, 0.01f },
+            WetnessRange = new float[] { 0.0f, 0.25f },
+            LifeProbability = 0.2f,
             PolarCaps = true
         };
         EveryPlanetTypeList.Add(Dust);
@@ -278,7 +440,9 @@ class PlanetFormation
             GreenhouseEffectRange = new float[] { 0, 1 },
             PressureRange = new float[] { 0, 0.0001f },
             EnvRadioactivityRange = new float[] { 0.0001f, 0.001f },
-            PolarCaps = true
+            WetnessRange = new float[] { 0.0f, 0.25f },
+            PolarCaps = true,
+            LifeProbability = 1.0f,
         };
         EveryPlanetTypeList.Add(Rocky);
 
@@ -290,7 +454,9 @@ class PlanetFormation
             TemperatureRange = new float[] { -1000, -5 },
             GreenhouseEffectRange = new float[] { 0, 3 },
             PressureRange = new float[] { 0f, 0.5f },
-            EnvRadioactivityRange = new float[] { 0, 0.02f }
+            EnvRadioactivityRange = new float[] { 0, 0.02f },
+            WetnessRange = new float[] { 0.5f, 1.0f }, 
+            LifeProbability = 0.1f
         };
         EveryPlanetTypeList.Add(Ice);
 
@@ -302,7 +468,9 @@ class PlanetFormation
             TemperatureRange = new float[] { -150, 0 },
             GreenhouseEffectRange = new float[] { 0, 7 },
             PressureRange = new float[] { 0f, 0.3f },
-            EnvRadioactivityRange = new float[] { 0.1f, 0.7f }
+            EnvRadioactivityRange = new float[] { 0.1f, 0.7f },
+            WetnessRange = new float[] { 0.5f, 1.0f }, 
+            LifeProbability = 0.3f
         };
         EveryPlanetTypeList.Add(Snow);
 
@@ -315,7 +483,9 @@ class PlanetFormation
             GreenhouseEffectRange = new float[] { 25, 33 },
             PressureRange = new float[] { 0.4f, 5.7f },
             EnvRadioactivityRange = new float[] { 0.001f, 0.05f },
-            PolarCaps = true
+            WetnessRange = new float[] { 0.5f, 1.0f },
+            PolarCaps = true,
+            LifeProbability = 0.7f
         };
         EveryPlanetTypeList.Add(Mud);
 
@@ -327,7 +497,9 @@ class PlanetFormation
             TemperatureRange = new float[] { 100, 600 },
             GreenhouseEffectRange = new float[] { 100, 400 },
             PressureRange = new float[] { 30f, 100f },
-            EnvRadioactivityRange = new float[] { 0.001f, 0.05f }
+            EnvRadioactivityRange = new float[] { 0.001f, 0.05f },
+            WetnessRange = new float[] { 0.0f, 0.25f },
+            LifeProbability = 0.05f
         };
         EveryPlanetTypeList.Add(Greenhouse);
 
@@ -339,7 +511,9 @@ class PlanetFormation
             TemperatureRange = new float[] { -1000, 20000 },
             GreenhouseEffectRange = new float[] { 5, 40 },
             PressureRange = new float[] { 20f, 300f },
-            EnvRadioactivityRange = new float[] { 0.001f, 5f }
+            EnvRadioactivityRange = new float[] { 0.001f, 5f },
+            WetnessRange = new float[] { 0.0f, 0.01f },
+
         };
         EveryPlanetTypeList.Add(Gas);
 
@@ -351,7 +525,8 @@ class PlanetFormation
             TemperatureRange = new float[] { -1000, 1300 },
             GreenhouseEffectRange = new float[] { 0, 2 },
             PressureRange = new float[] { 0f, 0.01f },
-            EnvRadioactivityRange = new float[] { 0.005f, 0.1f }
+            EnvRadioactivityRange = new float[] { 0.005f, 0.1f },
+            WetnessRange = new float[] { 0.0f, 0.25f }
         };
         EveryPlanetTypeList.Add(Metallic);
 
@@ -363,7 +538,9 @@ class PlanetFormation
             TemperatureRange = new float[] { -1000, -5 },
             GreenhouseEffectRange = new float[] { 0, 4 },
             PressureRange = new float[] { 0f, 0.03f },
-            EnvRadioactivityRange = new float[] { 0.0001f, 0.002f }
+            EnvRadioactivityRange = new float[] { 0.0001f, 0.002f },
+            WetnessRange = new float[] { 0.0f, 0.25f },
+            LifeProbability = 0.15f
         };
         EveryPlanetTypeList.Add(Nitrate);
 
@@ -375,7 +552,8 @@ class PlanetFormation
             TemperatureRange = new float[] { 1200, 999999 },
             GreenhouseEffectRange = new float[] { 0, 5 },
             PressureRange = new float[] { 0f, 0.001f },
-            EnvRadioactivityRange = new float[] { 0.02f, 0.2f }
+            EnvRadioactivityRange = new float[] { 0.02f, 0.2f },
+             WetnessRange = new float[] { 0.0f, 0.01f }
         };
         EveryPlanetTypeList.Add(Lava);
 
@@ -388,7 +566,9 @@ class PlanetFormation
             TemperatureRange = new float[] { -100, 340 },
             GreenhouseEffectRange = new float[] { 5, 60 },
             PressureRange = new float[] { 0.01f, 6.5f },
-            EnvRadioactivityRange = new float[] { 0.0001f, 0.1f }
+            EnvRadioactivityRange = new float[] { 0.0001f, 0.1f },
+            WetnessRange = new float[] { 0.0f, 0.4f },
+            LifeProbability = 0.5f
         };
         EveryPlanetTypeList.Add(Acid);
 
@@ -400,7 +580,8 @@ class PlanetFormation
             TemperatureRange = new float[] { -1000, 130 },
             GreenhouseEffectRange = new float[] { 0, 15 },
             PressureRange = new float[] { 0.0f, 0.1f },
-            EnvRadioactivityRange = new float[] { 0.0001f, 0.002f }
+            EnvRadioactivityRange = new float[] { 0.0001f, 0.002f },
+                        WetnessRange = new float[] { 0.0f, 0.4f },
         };
         EveryPlanetTypeList.Add(Asphalt);
 
@@ -412,7 +593,9 @@ class PlanetFormation
             TemperatureRange = new float[] { -1000, -50 },
             GreenhouseEffectRange = new float[] { 2, 25 },
             PressureRange = new float[] { 0.0f, 0.5f },
-            EnvRadioactivityRange = new float[] { 0.0001f, 0.002f }
+            EnvRadioactivityRange = new float[] { 0.0001f, 0.002f },
+            WetnessRange = new float[] { 0.0f, 0.4f },
+            LifeProbability = 0.2f
         };
         EveryPlanetTypeList.Add(Citric);
 
@@ -424,7 +607,8 @@ class PlanetFormation
             TemperatureRange = new float[] { -1000, 1900 },
             GreenhouseEffectRange = new float[] { 0, 1 },
             PressureRange = new float[] { 0.0f, 0.001f },
-            EnvRadioactivityRange = new float[] { 0.0001f, 0.002f }
+            EnvRadioactivityRange = new float[] { 0.0001f, 0.002f },
+                        WetnessRange = new float[] { 0.0f, 0.4f },
         };
         EveryPlanetTypeList.Add(Chromic);
 
@@ -436,7 +620,9 @@ class PlanetFormation
             TemperatureRange = new float[] { -20, 100 },
             GreenhouseEffectRange = new float[] { 0, 80 },
             PressureRange = new float[] { 0.1f, 20.000f },
-            EnvRadioactivityRange = new float[] { 0.00001f, 0.002f }
+            EnvRadioactivityRange = new float[] { 0.00001f, 0.002f },
+            WetnessRange = new float[] { 0.0f, 0.4f },
+            LifeProbability = 0.8f
         };
 
         EveryPlanetTypeList.Add(Slime);

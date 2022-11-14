@@ -177,6 +177,30 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  modifiedHeightCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -1
+      value: -1
+      inSlope: 0
+      outSlope: 1
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   surfaceVariation: 0.61
   negativePeakClip: 0
   positivePeakClip: 2
@@ -193,7 +217,6 @@ MonoBehaviour:
   gasSurface: 0
   fluidic: 1
   weirdA: 0
-  slush: 0
   supercontinentsB: 1
   supercontinents: 1
   blotches: 0
@@ -204,7 +227,7 @@ MonoBehaviour:
   crystalStructuresNum: 0
   colorHigh: {r: 0.6320754, g: 0.16934848, b: 0.6296141, a: 1}
   colorMid: {r: 0.5283019, g: 0.35094908, b: 0.111641124, a: 1}
-  colorLow: {r: 0.33331236, g: 0.057671744, b: 0.4245283, a: 1}
+  colorLow: {r: 0.2505093, g: 0.058823533, b: 0.42352942, a: 1}
   colorHighShifted: {r: 0.6320754, g: 0.16934848, b: 0.6296141, a: 1}
   colorMidShifted: {r: 0.5283019, g: 0.35094905, b: 0.111641094, a: 1}
   colorLowShifted: {r: 0.33331236, g: 0.057671744, b: 0.4245283, a: 1}
@@ -213,7 +236,7 @@ MonoBehaviour:
   colorHeightHigh: 1.01
   colorHeightMid: 1.005
   colorHeightLow: 1.001
-  colorHeightDeep: 0.992
+  colorHeightDeep: 0.995
   colorStripify: 1
   colorHueShift: 0
   atmosphereThickness: 0.00658

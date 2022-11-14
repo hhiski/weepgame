@@ -118,7 +118,6 @@ public class GalaxyCatalog : MonoBehaviour
         Globals.spaceScaleLevel = "cluster";
         Globals.spaceAddress[0] = clusterId;
 
-     //   UI.ShowUi(false,false,true);
 
         foreach (Transform child in gameObject.transform)
         {
@@ -175,7 +174,6 @@ public class GalaxyCatalog : MonoBehaviour
         GameObject SystemScope = GameObject.Find("Galaxy/SystemScope");
         SystemController SystemController = SystemScope.GetComponent<SystemController>();
 
-        //  Star VisibleSystem = Universe.Clusters[clusterId].Stars[systemId]; //WRONG!! CHANGE LOCAL ORDER ID TO GLOBAL ID
         SkyboxController.SetSkybox("system");
         foreach (Cluster cluster in Universe.Clusters)
         {

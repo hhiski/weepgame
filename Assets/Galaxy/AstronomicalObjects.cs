@@ -41,6 +41,8 @@ static public class CelestialBody {
         public int SubType;
         public int Seed;
         public int RingType;
+        public Hydrosphere Hydrosphere;
+        public Biosphere Biosphere;
         public float Mass;
         public float PolarCoverage;
         public Atmosphere Atm;
@@ -66,8 +68,9 @@ static public class CelestialBody {
             RotationSpeed = Random.Range(0.5f, 8);
             PolarCoverage = 0;
             Atm = Type.RandomAtmosphere;
-            Features = new PlanetaryFeatures(Atm);
-
+            Hydrosphere = new Hydrosphere(Type.WetnessRange, Atm);
+            Biosphere = new Biosphere(Type.LifeProbability);
+            Features = new PlanetaryFeatures(Atm, Type, Biosphere, Hydrosphere);
 
         }
 
@@ -91,7 +94,9 @@ static public class CelestialBody {
             {
                 Atm = Type.RandomAtmosphere;
             }
-            Features = new PlanetaryFeatures(Atm);
+            Biosphere = new Biosphere(Type.LifeProbability);
+            Hydrosphere = new Hydrosphere(Type.WetnessRange, Atm);
+            Features = new PlanetaryFeatures(Atm, Type,Biosphere, Hydrosphere);
 
         }
 
@@ -107,7 +112,9 @@ static public class CelestialBody {
             Mass = MassProbability(Type.Name);
             PolarCoverage = 0;
             Atm = Type.RandomAtmosphere;
-            Features = new PlanetaryFeatures(Atm);
+            Hydrosphere = new Hydrosphere(Type.WetnessRange, Atm);
+            Biosphere = new Biosphere(Type.LifeProbability);
+            Features = new PlanetaryFeatures(Atm, Type, Biosphere, Hydrosphere);
 
         }
 

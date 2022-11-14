@@ -20,8 +20,6 @@ public class GalaxyGraphics : MonoBehaviour
     public Material RedDustMaterial;
 
 
-    Vector3 sol_position = new Vector3(0, 0, 0);
-
 
     public static float Pow3Constrained(float x)
     {

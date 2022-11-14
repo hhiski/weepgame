@@ -1,11 +1,9 @@
 fileFormatVersion: 2
-guid: 1babc8c09ba1b934b83c5e0b77dd9e38
+guid: 4119bc7607411ef469d6e9a34761892d
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - PlanetaryFeatureLocation: {fileID: 6283343257432920624, guid: 8cac111a0b0fc0c47abb071aa3c03734,
-      type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

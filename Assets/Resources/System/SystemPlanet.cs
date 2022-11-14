@@ -6,16 +6,77 @@ public class SystemPlanet : MonoBehaviour
 {
 
     public Planet Planet;
-    public Vector3 Pos { get; set; }
-    public float orbitSpeed = 5f;
+
+    public GameObject PlanetaryFeatureLocation;
+
+    List<GameObject> FeatureLocations = new List<GameObject>();
+    public Vector3 Pos;
+    public GameObject RingPrefab;
+
+
 
 
     void Start()
     {
         CreateOrbitPoints(transform.position, transform.parent.position);
 
-      //  this.GetComponent<SphereCollider>().radius = Planet.Mass*7;
     }
+
+    List<GameObject> SetFeatureLocations(GameObject surfaceObject)
+    {
+        PlanetSurface surface = surfaceObject.GetComponent<PlanetSurface>();
+        List<GameObject> featureLocations = new List<GameObject>();
+
+        foreach (var feature in Planet.Features.PlanetaryFeatureList)
+        {
+            GameObject planetFeatureLocation = Instantiate(PlanetaryFeatureLocation, surfaceObject.transform) as GameObject;
+            planetFeatureLocation.GetComponent<PlanetFeatureLocation>().Feature = feature;
+            planetFeatureLocation.transform.localPosition = surface.SuitableFeaturePosition(feature.LocationType);
+
+            featureLocations.Add(planetFeatureLocation);
+        }
+
+        return featureLocations;
+
+    }
+    
+
+    public void Visualize()
+    {
+        GameObject PlanetSurfaceObject;
+
+        PlanetSurfaceObject = CreatePlanetSurface();
+        CreatePlanetRing(PlanetSurfaceObject);
+        FeatureLocations = SetFeatureLocations(PlanetSurfaceObject);
+    }
+
+    GameObject CreatePlanetSurface()
+    {
+        string planetTypename = Planet.Type.Name;
+        string planetPath = "System/Planets/" + planetTypename + "Planet/" + planetTypename + "Planet";
+        GameObject PlanetVisualPrefab = Resources.Load<GameObject>(planetPath) as GameObject;
+
+        if (PlanetVisualPrefab == null)
+        {
+            Debug.Log("PLANET:" + planetPath + " NOT FOUND!");
+            PlanetVisualPrefab = Resources.Load<GameObject>("System/Planets/MinorPlanet/MinorPlanet") as GameObject;
+        }
+
+        GameObject PlanetSurfaceObject = Instantiate(PlanetVisualPrefab, this.transform, false) as GameObject;
+        PlanetSurfaceObject.GetComponent<PlanetSurface>().Planet = Planet;
+        PlanetSurfaceObject.GetComponent<PlanetSurface>().SetValues();
+        PlanetSurfaceObject.GetComponent<PlanetSurface>().CopyVertices();
+        PlanetSurfaceObject.GetComponent<PlanetSurface>().ShapePlanetSurface();
+
+        return PlanetSurfaceObject;
+    }
+
+    void CreatePlanetRing(GameObject surface)
+    {
+        GameObject PlanetRing = Instantiate(RingPrefab, surface.transform, false) as GameObject;
+        PlanetRing.GetComponent<PlanetRing>().CreateRing(Planet.RingType);
+    }
+
 
 
     void OnMouseDown()
@@ -23,15 +84,19 @@ public class SystemPlanet : MonoBehaviour
         // this.transform.parent.GetComponent<SystemPlanet>().SetUiPlanetData();
         UiCanvas UI = GameObject.Find("/Canvas").GetComponent<UiCanvas>();
         UI.PlanetDataView(Planet);
+
+        UIFeatureTracker UIFeatureTracker = GameObject.Find("/Canvas/FeatureTracker").GetComponent<UIFeatureTracker>();
+
+        UIFeatureTracker.TrackFeatureLocations(FeatureLocations);
     }
 
-    public void SetUiPlanetData()
+
+    /*
+    public void CreatePlanetaryFeatureLocations()
     {
-
-        UiCanvas UI = GameObject.Find("/Canvas").GetComponent<UiCanvas>();
-        UI.PlanetDataView(Planet);
-    }
-
+        GameObject hydrosphereLocation = Instantiate(PlanetaryFeatureLocation, transform);
+        hydrosphereLocation.transform.position = PlanetSurface.RandomVertex();
+    }*/
 
 
     float GetPlanetOrbitalDistance(Vector3 pos, Vector3 parentPos)

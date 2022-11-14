@@ -61,7 +61,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 7bf007f7bf0d2924483affc223633fca, type: 3}
+        m_Texture: {fileID: 2800000, guid: ec7b33cc4e2ce864fb0448429989aa0a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -113,7 +113,7 @@ Material:
     - _DstBlend: 10
     - _EmissionEnabled: 0
     - _EnableExternalAlpha: 0
-    - _Exposure: 0.64
+    - _Exposure: 0.47
     - _ExtraEmission: 0.75
     - _FlipbookMode: 0
     - _GlossMapScale: 1
@@ -130,7 +130,9 @@ Material:
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _RimPower: 3
-    - _Rotation: 128
+    - _Rotation: 30
+    - _SkyExponent1: 7.67
+    - _SkyIntensity: 1.75
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
@@ -143,6 +145,7 @@ Material:
     - _StencilReadMask: 255
     - _StencilWriteMask: 255
     - _SunDisk: 2
+    - _SunIntensity: 7.1
     - _SunSize: 0.564
     - _SunSizeConvergence: 6.12
     - _UVSec: 0
@@ -155,9 +158,13 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}
     - _GroundColor: {r: 0.369, g: 0.349, b: 0.341, a: 1}
+    - _MoonVector: {r: 0.269, g: 0.615, b: 1.93, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
     - _RimColor: {r: 1, g: 1, b: 1, a: 0}
+    - _SkyColor1: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 0}
+    - _SkyColor2: {r: 0, g: 0, b: 0, a: 0}
     - _SkyTint: {r: 1, g: 0.07924521, b: 0.07924521, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
-    - _Tint: {r: 0.5882353, g: 1, b: 0.7395172, a: 1}
+    - _SunColor: {r: 1, g: 0.99, b: 0.87, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []

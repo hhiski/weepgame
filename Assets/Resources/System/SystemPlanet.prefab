@@ -46,7 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a694a15055cad6648873eb06c967cd18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  orbitSpeed: 5
+  PlanetaryFeatureLocation: {fileID: 6283343257432920624, guid: 8cac111a0b0fc0c47abb071aa3c03734,
+    type: 3}
+  Pos: {x: 0, y: 0, z: 0}
+  RingPrefab: {fileID: 6848583076240605450, guid: f2b7cae325caf0542a4b2e20d6774162,
+    type: 3}
 --- !u!120 &-3655615448420779084
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -168,5 +172,5 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 7
+  m_Radius: 6.7
   m_Center: {x: 0, y: 0, z: 0.5}

@@ -8,7 +8,6 @@ public class SystemController : GalaxyCatalog
     public GameObject PlanetSystemPrefab;
     public GameObject BeltPrefab;
     public GameObject CometPrefab;
-    public GameObject RingPrefab;
     public GameObject SystemStarPrefab;
 
     Star selectedVisibleSystem;
@@ -40,7 +39,7 @@ public class SystemController : GalaxyCatalog
 
     }
 
-    
+
 
     public void VisualizeSystem(Star visibleSystem)
     {
@@ -138,7 +137,9 @@ public class SystemController : GalaxyCatalog
             PlanetSystem.GetComponent<SystemPlanet>().Planet = planet;
             PlanetSystem.transform.localScale = new Vector3(planet.Mass, planet.Mass, planet.Mass);
             PlanetSystem.transform.parent = this.transform;
+            PlanetSystem.GetComponent<SystemPlanet>().Visualize();
 
+            /*
             string planetTypename = planet.Type.Name;
             string planetPath = "System/Planets/"+ planetTypename +"Planet/" + planetTypename + "Planet";
             GameObject PlanetVisualPrefab = Resources.Load<GameObject>(planetPath) as GameObject;
@@ -153,6 +154,9 @@ public class SystemController : GalaxyCatalog
             PlanetVisual.GetComponent<PlanetSurface>().SetValues();
             PlanetVisual.GetComponent<PlanetSurface>().CopyVertices();
             PlanetVisual.GetComponent<PlanetSurface>().ShapePlanetSurface();
+            
+            PlanetSystem.GetComponent<SystemPlanet>().PlanetSurface = PlanetVisual.GetComponent<PlanetSurface>();
+            PlanetSystem.GetComponent<SystemPlanet>().CreatePlanetaryFeatureLocations();
 
             GameObject PlanetRing = Instantiate(RingPrefab, PlanetVisual.transform, false) as GameObject;
             PlanetRing.GetComponent<PlanetRing>().CreateRing(planet.RingType);
@@ -169,6 +173,7 @@ public class SystemController : GalaxyCatalog
             PlanetVisual.GetComponent<PlanetSurface>().ShapePlanetSurface();
             PlanetVisual.transform.localScale = new Vector3(1.4f, 1.4f, 1.4f);
                 }
+            */
         }
 
 

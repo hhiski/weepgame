@@ -155,6 +155,8 @@ public  class UiCanvas : MonoBehaviour
         FeatureTracker(true, targetPos, planet.Features);
 
         CameraOrbit.CameraToPos(targetPos);
+
+
     }
 
 

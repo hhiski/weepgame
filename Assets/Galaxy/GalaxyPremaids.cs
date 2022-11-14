@@ -181,6 +181,7 @@ public class Premaid
         Earth.Atm.TemperatureB = SpaceMath.GetEffectiveTemperature(Earth.OrbitDistance, 0.3f, Sol.SolarTemperature);
         Earth.Atm.TemperatureG = 33;
         Earth.Atm.Radiation = 0.0024f;
+        Earth.Biosphere.BiosphereLevel = 1;
 
         Moon Luna = new Moon();
         Luna.Pos = SpaceMath.RandomPositionOnCircle(15, Earth.Pos);
@@ -204,6 +205,7 @@ public class Premaid
         Mars.Atm.PrimaryGas = gasTypes.CarbonDioxideNitrogen;
         Mars.Atm.Pressure = 0.00658f;
         Mars.Atm.Radiation = 0.233f;
+        Mars.Biosphere.BiosphereLevel = 1;
         Sol.Planets.Add(Mars);
 
         Planet Jupiter = new Planet();

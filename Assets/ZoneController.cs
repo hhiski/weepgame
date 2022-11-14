@@ -93,7 +93,7 @@ public class ZoneController : MonoBehaviour
 
         for (int i = 0; i < boundaryPath.Count; i++)
         {
-            pos = vertices[boundaryPath[i].v1];
+            pos = vertices[boundaryPath[i].VertexStart];
             border[i] = transform.TransformPoint(pos);
         }
 
@@ -107,30 +107,31 @@ public class ZoneController : MonoBehaviour
 
     public struct Edge
     {
-        public int v1;
-        public int v2;
+        public int VertexStart;
+        public int VertexEnd;
         public int triangleIndex;
-        public Edge(int aV1, int aV2, int aIndex)
+
+        public Edge(int start, int end, int vertexIndex)
         {
-            v1 = aV1;
-            v2 = aV2;
-            triangleIndex = aIndex;
+            VertexStart = start;
+            VertexEnd = end;
+            triangleIndex = vertexIndex;
         }
     }
 
-    public List<Edge> GetEdges(int[] aIndices)
+    public List<Edge> GetEdges(int[] indices)
     {
-        List<Edge> result = new List<Edge>();
-        for (int i = 0; i < aIndices.Length; i += 3)
+        List<Edge> edgeList = new List<Edge>();
+        for (int i = 0; i < indices.Length; i += 3)
         {
-            int v1 = aIndices[i];
-            int v2 = aIndices[i + 1];
-            int v3 = aIndices[i + 2];
-            result.Add(new Edge(v1, v2, i));
-            result.Add(new Edge(v2, v3, i));
-            result.Add(new Edge(v3, v1, i));
+            int v1 = indices[i];
+            int v2 = indices[i + 1];
+            int v3 = indices[i + 2];
+            edgeList.Add(new Edge(v1, v2, i));
+            edgeList.Add(new Edge(v2, v3, i));
+            edgeList.Add(new Edge(v3, v1, i));
         }
-        return result;
+        return edgeList;
     }
 
     public List<Edge> FindBoundary( List<Edge> aEdges)
@@ -140,7 +141,7 @@ public class ZoneController : MonoBehaviour
         {
             for (int n = i - 1; n >= 0; n--)
             {
-                if (result[i].v1 == result[n].v2 && result[i].v2 == result[n].v1)
+                if (result[i].VertexStart == result[n].VertexEnd && result[i].VertexEnd == result[n].VertexStart)
                 {
                     // shared edge so remove both
                     result.RemoveAt(i);
@@ -161,7 +162,7 @@ public class ZoneController : MonoBehaviour
             for (int n = i + 1; n < result.Count; n++)
             {
                 Edge a = result[n];
-                if (E.v2 == a.v1)
+                if (E.VertexEnd == a.VertexStart)
                 {
                     // in this case they are already in order so just continoue with the next one
                     if (n == i + 1)
