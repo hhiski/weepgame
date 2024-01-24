@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: b3c56e09689ce26479f41bd7f6f0df7b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ArmEmitterPrefab: {instanceID: 0}
+  - ZonePrefab: {instanceID: 0}
+  - Galaxy: {instanceID: 0}
+  - DustMaterial: {fileID: 2100000, guid: ca12d4fb9b1c172428e88d73bafc9ac3, type: 2}
+  - RedDustMaterial: {fileID: 2100000, guid: 8a1387381e241794798b281ad5f08d4f, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
